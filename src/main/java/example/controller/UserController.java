@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import example.model.AppUser;
 import org.modelmapper.ModelMapper;
-import org.springframework.security.access.prepost.PreAuthorize;
+//import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -47,7 +47,7 @@ public class UserController {
 
   @PostMapping("/signup")
   @ApiOperation(value = "${UserController.signup}")
-  @ApiResponses(value = {//
+  @ApiResponses(value = {
       @ApiResponse(code = 400, message = "Something went wrong"), //
       @ApiResponse(code = 403, message = "Access denied"), //
       @ApiResponse(code = 422, message = "Username is already in use")})
@@ -56,7 +56,7 @@ public class UserController {
   }
 
   @DeleteMapping(value = "/{username}")
-  @PreAuthorize(value = "hasRole('ROLE_ADMIN')")
+  //@PreAuthorize(value = "hasRole('ROLE_ADMIN')")
   @ApiOperation(value = "${UserController.delete}", authorizations = { @Authorization(value="apiKey") })
   @ApiResponses(value = {//
       @ApiResponse(code = 400, message = "Something went wrong"), //
@@ -70,7 +70,7 @@ public class UserController {
   }
 
   @GetMapping(value = "/{username}")
-  @PreAuthorize("hasRole('ROLE_ADMIN')")
+  //@PreAuthorize("hasRole('ROLE_ADMIN')")
   @ApiOperation(value = "${UserController.search}", response = UserResponseDTO.class, authorizations = { @Authorization(value="apiKey") })
   @ApiResponses(value = {//
       @ApiResponse(code = 400, message = "Something went wrong"), //
@@ -82,7 +82,7 @@ public class UserController {
   }
 
   @GetMapping(value = "/me")
-  @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_CLIENT')")
+  //@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_CLIENT')")
   @ApiOperation(value = "${UserController.me}", response = UserResponseDTO.class, authorizations = { @Authorization(value="apiKey") })
   @ApiResponses(value = {//
       @ApiResponse(code = 400, message = "Something went wrong"), //
@@ -93,7 +93,7 @@ public class UserController {
   }
 
   @GetMapping("/refresh")
-  @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_CLIENT')")
+  //@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_CLIENT')")
   public String refresh(HttpServletRequest req) {
     return userService.refresh(req.getRemoteUser());
   }

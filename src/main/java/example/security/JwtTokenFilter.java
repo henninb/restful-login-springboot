@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import example.exception.CustomException;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 // We should use OncePerRequestFilter since we are doing a database call, there is no point in doing this more than once
@@ -30,10 +29,11 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         Authentication auth = jwtTokenProvider.getAuthentication(token);
         SecurityContextHolder.getContext().setAuthentication(auth);
       }
-    } catch (CustomException ex) {
+    } catch (RuntimeException ex) {
       //this is very important, since it guarantees the user is not authenticated at all
       SecurityContextHolder.clearContext();
-      httpServletResponse.sendError(ex.getHttpStatus().value(), ex.getMessage());
+      //TODO: bh fix this
+      //httpServletResponse.sendError(HTTPResp, ex.getMessage());
       return;
     }
 

@@ -10,7 +10,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import example.exception.CustomException;
 import example.model.AppUser;
 import example.repository.UserRepository;
 import example.security.JwtTokenProvider;
@@ -29,7 +28,8 @@ public class UserService {
       authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
       return jwtTokenProvider.createToken(username, userRepository.findByUsername(username).getAppUserRoles());
     } catch (AuthenticationException e) {
-      throw new CustomException("Invalid username/password supplied", HttpStatus.UNPROCESSABLE_ENTITY);
+      //throw new CustomException("Invalid username/password supplied", HttpStatus.UNPROCESSABLE_ENTITY);
+      throw new RuntimeException("Invalid username/password supplied");
     }
   }
 
@@ -39,7 +39,8 @@ public class UserService {
       userRepository.save(appUser);
       return jwtTokenProvider.createToken(appUser.getUsername(), appUser.getAppUserRoles());
     } else {
-      throw new CustomException("Username is already in use", HttpStatus.UNPROCESSABLE_ENTITY);
+      //throw new CustomException("Username is already in use", HttpStatus.UNPROCESSABLE_ENTITY);
+      throw new RuntimeException("Username is already in use");
     }
   }
 
@@ -50,7 +51,8 @@ public class UserService {
   public AppUser search(String username) {
     AppUser appUser = userRepository.findByUsername(username);
     if (appUser == null) {
-      throw new CustomException("The user doesn't exist", HttpStatus.NOT_FOUND);
+      //throw new CustomException("The user doesn't exist", HttpStatus.NOT_FOUND);
+      throw new RuntimeException("The user doesn't exist");
     }
     return appUser;
   }
