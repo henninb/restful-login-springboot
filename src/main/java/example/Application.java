@@ -29,7 +29,7 @@ public class Application implements CommandLineRunner {
     AppUser admin = new AppUser();
     admin.setUsername("admin");
     admin.setPassword("admin");
-    admin.setEmail("admin@email.com");
+    //admin.setEmail("admin@email.com");
     admin.setAppUserRoles(new ArrayList<>(Collections.singletonList(AppUserRole.ROLE_ADMIN)));
 
     userService.signup(admin);
@@ -37,7 +37,7 @@ public class Application implements CommandLineRunner {
     AppUser client = new AppUser();
     client.setUsername("client");
     client.setPassword("client");
-    client.setEmail("client@email.com");
+    //client.setEmail("client@email.com");
     client.setAppUserRoles(new ArrayList<>(Collections.singletonList(AppUserRole.ROLE_CLIENT)));
 
     userService.signup(client);
