@@ -10,9 +10,8 @@ import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 
 import example.model.AppUserRole;
-import org.springframework.beans.factory.annotation.Autowired;
+import example.service.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -37,8 +36,11 @@ public class JwtTokenProvider {
   @Value("${security.jwt.token.expire-length:3600000}")
   private long validityInMilliseconds = 3600000; // 1h
 
-  @Autowired
-  private MyUserDetails myUserDetails;
+  private final MyUserDetailsService myUserDetails;
+
+  public JwtTokenProvider(MyUserDetailsService myUserDetails) {
+    this.myUserDetails = myUserDetails;
+  }
 
   @PostConstruct
   protected void init() {

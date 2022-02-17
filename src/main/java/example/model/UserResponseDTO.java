@@ -1,22 +1,20 @@
-package example.dto;
+package example.model;
 
 import java.util.List;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import example.model.AppUserRole;
 
 @Data
-@NoArgsConstructor
-public class UserDataDTO {
-  
+public class UserResponseDTO {
+
   @ApiModelProperty(position = 0)
-  private String username;
+  private Integer id;
   @ApiModelProperty(position = 1)
-  private String email;
+  private String username;
   @ApiModelProperty(position = 2)
-  private String password;
+  private String email;
   @ApiModelProperty(position = 3)
   List<AppUserRole> appUserRoles;
 

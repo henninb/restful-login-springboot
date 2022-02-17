@@ -1,6 +1,5 @@
-package example.security;
+package example.service;
 
-import lombok.RequiredArgsConstructor;
 import example.model.AppUser;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -10,10 +9,13 @@ import org.springframework.stereotype.Service;
 import example.repository.UserRepository;
 
 @Service
-@RequiredArgsConstructor
-public class MyUserDetails implements UserDetailsService {
+public class MyUserDetailsService implements UserDetailsService {
 
   private final UserRepository userRepository;
+
+  public MyUserDetailsService(UserRepository userRepository) {
+    this.userRepository = userRepository;
+  }
 
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

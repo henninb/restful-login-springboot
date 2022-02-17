@@ -24,11 +24,6 @@ public class Application implements CommandLineRunner {
     SpringApplication.run(Application.class, args);
   }
 
-  @Bean
-  public ModelMapper modelMapper() {
-    return new ModelMapper();
-  }
-
   @Override
   public void run(String... params)  {
     AppUser admin = new AppUser();
