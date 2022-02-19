@@ -6,11 +6,9 @@ import java.util.Collections;
 import lombok.RequiredArgsConstructor;
 import example.model.AppUser;
 import example.model.AppUserRole;
-import org.modelmapper.ModelMapper;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 
 import example.service.UserService;
 
